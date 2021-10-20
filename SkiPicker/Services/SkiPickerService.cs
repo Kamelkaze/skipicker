@@ -38,12 +38,12 @@ namespace SkiPicker.Services
                 return skiLength;
 
             if (skiInfo.Age < 9)
-                return skiLength + RandomGenerator.Next(10) + 10;
+                return skiLength + RandomGenerator.Next(11) + 10;
 
             if (skiInfo.SkiType.Equals(SkiInfo.SkiTypes.Classic))
                 return Math.Min(skiLength + 20, 207);
             
-            return skiLength + RandomGenerator.Next(5) + 10;
+            return skiLength + RandomGenerator.Next(6) + 10;
         }
     }
 }
