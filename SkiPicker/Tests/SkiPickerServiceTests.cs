@@ -32,7 +32,7 @@ namespace SkiPicker.UnitTests.Services
 
             var result = skiService.CalculateSkiLength(info);
 
-            Assert.True(result == expectedResult, "Result should be 180");
+            Assert.True(result == expectedResult, "Result should be 170");
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace SkiPicker.UnitTests.Services
 
             var result = skiService.CalculateSkiLength(info);
 
-            Assert.True(result == expectedResult, "Result should be 180");
+            Assert.True(result == expectedResult, "Result should be 165");
         }
 
         [Fact]
@@ -115,7 +115,7 @@ namespace SkiPicker.UnitTests.Services
         }
 
         [Fact]
-        public void CalculateSkiLength__Age3Height100ClassicAndFreestyle_ClassicEqualsFreestyleLength()
+        public void CalculateSkiLength__AgeLessThan4_ClassicEqualsFreestyleLength()
         {
             var mockRandom = new MockRandom(5);
             var skiService = new SkiPickerService(null, mockRandom);
@@ -125,11 +125,11 @@ namespace SkiPicker.UnitTests.Services
             var resultFreestyle = skiService.CalculateSkiLength(infoFreestyle);
             var resultClassic = skiService.CalculateSkiLength(infoClassic);
 
-            Assert.True(resultFreestyle == resultClassic, "Result should be 0");
+            Assert.True(resultFreestyle == resultClassic, "Result freestyle should be equal to classic");
         }
 
         [Fact]
-        public void CalculateSkiLength__Age7Height100ClassicAndFreestyle_ClassicEqualsFreestyleLength()
+        public void CalculateSkiLength__Age5to8_ClassicEqualsFreestyleLength()
         {
             var mockRandom = new MockRandom(5);
             var skiService = new SkiPickerService(null, mockRandom);
@@ -139,11 +139,11 @@ namespace SkiPicker.UnitTests.Services
             var resultFreestyle = skiService.CalculateSkiLength(infoFreestyle);
             var resultClassic = skiService.CalculateSkiLength(infoClassic);
 
-            Assert.True(resultFreestyle == resultClassic, "Result should be 0");
+            Assert.True(resultFreestyle == resultClassic, "Result freestyle should be equal to classic");
         }
 
         [Fact]
-        public void CalculateSkiLength__Age10Height100ClassicAndFreestyle_ClassicNotEqualsFreestyleLength()
+        public void CalculateSkiLength__AgeGreatherThan8_ClassicNotEqualsFreestyleLength()
         {
             var mockRandom = new MockRandom(5);
             var skiService = new SkiPickerService(null, mockRandom);
@@ -153,11 +153,11 @@ namespace SkiPicker.UnitTests.Services
             var resultFreestyle = skiService.CalculateSkiLength(infoFreestyle);
             var resultClassic = skiService.CalculateSkiLength(infoClassic);
 
-            Assert.True(resultFreestyle != resultClassic, "Result should be 0");
+            Assert.True(resultFreestyle != resultClassic, "Result free style should not be equal to classic");
         }
 
         [Fact]
-        public void CalculateSkiLength_InputIsNull_ThrowsError()
+        public void CalculateSkiLength_InputIsNull_ThrowsArgumentNullException()
         {
             var mockRandom = new MockRandom(5);
             var skiService = new SkiPickerService(null, mockRandom);
@@ -166,7 +166,7 @@ namespace SkiPicker.UnitTests.Services
         }
 
         [Fact]
-        public void CalculateSkiLength_InputIsAgeMinus1_ThrowsError()
+        public void CalculateSkiLength_InputIsAgeMinus1_ThrowsArgumentException()
         {
             var mockRandom = new MockRandom(5);
             var skiService = new SkiPickerService(null, mockRandom);
@@ -176,7 +176,7 @@ namespace SkiPicker.UnitTests.Services
         }
 
         [Fact]
-        public void CalculateSkiLength_InputIsHeightMinus1_ThrowsError()
+        public void CalculateSkiLength_InputIsHeightMinus1_ThrowsArgumentException()
         {
             var mockRandom = new MockRandom(5);
             var skiService = new SkiPickerService(null, mockRandom);
