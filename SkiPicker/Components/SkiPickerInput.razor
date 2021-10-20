@@ -1,0 +1,56 @@
+﻿@page "/aaa"
+@using Microsoft.AspNetCore.Components.Forms
+@using Models
+@using Services
+@inject SkiPickerService SkiPickerService
+
+
+<EditForm Model="@skiInfo" OnValidSubmit="@SubmitInfo">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div>Height (cm)</div>
+    <InputNumber @bind-Value="skiInfo.Height" id="height" />
+    <div>Age</div>
+    <InputNumber @bind-Value="skiInfo.Age" id="age" />
+    <div>Style</div>
+    <InputSelect @bind-Value="skiInfo.SkiType" id="isFreestyle">
+        <option value="Classic">Classic</option>
+        <option value="Freestyle">Freestyle</option>
+    </InputSelect>
+    <br />
+    <button style="margin-top: 10px;" type="submit">Submit</button>
+
+
+    @if (!String.Empty.Equals(error))
+    {
+        <p style="margin-top: 10px;">@error</p>
+    }
+    else if (result != 0)
+    {
+        <p style="margin-top: 10px;">@result cm</p>
+    }
+
+</EditForm>
+
+
+@code {
+
+    private SkiInfo skiInfo = new SkiInfo();
+
+    private int result;
+
+    private string error;
+
+    public void SubmitInfo()
+    {
+        error = String.Empty;
+        try
+        {
+            result = SkiPickerService.CalculateSkiLength(skiInfo);
+            StateHasChanged();
+        } catch (Exception e)
+        {
+            error = e.Message;
+        }
+    }
+}

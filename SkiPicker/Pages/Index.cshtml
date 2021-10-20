@@ -1,0 +1,6 @@
+﻿@page
+@using SkiPicker.Components
+
+@(await Html.RenderComponentAsync<SkiPickerInput>(RenderMode.ServerPrerendered))
+
+<script src="_framework/blazor.server.js"></script>
